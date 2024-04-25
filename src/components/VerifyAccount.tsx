@@ -15,7 +15,9 @@ const VerifyAccount = () => {
     if (!siteURL || !accountToken || !type || !redirectTo) {
       setIsError(true);
     } else {
-      const accountVerificationURL = `${siteURL}?token=${accountToken}&type=${type}&redirect_to=${`${redirectTo}?token=${accountToken}`}`;
+      const accountVerificationURL = `${
+        process.env.NEXT_PUBLIC_SUPABASE_API_URL
+      }?token=${accountToken}&type=${type}&redirect_to=${`${redirectTo}?token=${accountToken}`}`;
       window.open(accountVerificationURL, "_self");
     }
   }, []);
