@@ -7,17 +7,16 @@ const VerifyAccount = () => {
   useEffect(() => {
     const queryParams = new URLSearchParams(location.search);
 
-    const siteURL = queryParams.get("siteURL");
     const accountToken = queryParams.get("token");
     const type = queryParams.get("type");
     const redirectTo = queryParams.get("redirect_to");
 
-    if (!siteURL || !accountToken || !type || !redirectTo) {
+    if (!accountToken || !type || !redirectTo) {
       setIsError(true);
     } else {
       const accountVerificationURL = `${
         process.env.NEXT_PUBLIC_SUPABASE_API_URL
-      }?token=${accountToken}&type=${type}&redirect_to=${`${redirectTo}?token=${accountToken}`}`;
+      }/auth/v1/verify?token=${accountToken}&type=${type}&redirect_to=${`${redirectTo}?token=${accountToken}`}`;
       window.open(accountVerificationURL, "_self");
     }
   }, []);
